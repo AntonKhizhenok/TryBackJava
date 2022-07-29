@@ -113,7 +113,7 @@ class Monsters extends Creature
         }
         else if (player.currentHealth<0)
         {
-            System.out.println(name+" hit You for "+ANSI_RED+randDamage+"damage"+ANSI_RESET);
+            System.out.println(name+" hit You for "+ANSI_RED+randDamage+" damage"+ANSI_RESET);
         }
         System.out.println();
     }
@@ -192,7 +192,7 @@ class Monsters extends Creature
         }
         else if (randChance > arrChance[1] && randChance <= arrChance[2])
         {
-            rarityMonsterList= allMonsterList.stream().filter(allMonsters1 -> allMonsters1.rarityMonster.contains("Unommon")).collect(Collectors.toList());
+            rarityMonsterList= allMonsterList.stream().filter(allMonsters1 -> allMonsters1.rarityMonster.contains("Uncommon")).collect(Collectors.toList());
             randMonster = MathUtils.GetRandomNumber(rarityMonsterList.size());
             monstersObj = rarityMonsterList.get(randMonster);
         }
@@ -216,7 +216,7 @@ class Monsters extends Creature
         }
         else if (randChance > arrChance[5] && randChance <= arrChance[6] )
         {
-            rarityMonsterList= allMonsterList.stream().filter(allMonsters1 -> allMonsters1.rarityMonster.contains("Mithic")).collect(Collectors.toList());
+            rarityMonsterList= allMonsterList.stream().filter(allMonsters1 -> allMonsters1.rarityMonster.contains("Mythic")).collect(Collectors.toList());
             randMonster = MathUtils.GetRandomNumber(rarityMonsterList.size());
             monstersObj = rarityMonsterList.get(randMonster);
         }

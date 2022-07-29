@@ -35,17 +35,16 @@ class Game
             System.out.println("1.View hero stats ");
             System.out.println("2.Fight the monsters");
             System.out.println("3.View inventory");
-            System.out.println("Exit from the game (Esc)");
+            System.out.println("Exit from the game (E)");
         }
 
 
         public static void input(Player inputPlayer) throws FileNotFoundException, IOException
         {
-
-            int key=scanner.nextInt();
+            String key=scanner.next();
             switch (key)
             {
-                case 1:
+                case "1":
                     {
                         inputPlayer.PrintInfoPlayer(inputPlayer);
                         System.out.println("Use (E)NTER to continie");
@@ -59,7 +58,7 @@ class Game
                         }
                         break;
                     }
-                case 2:
+                case "2":
                     {
                         System.out.println("\033[H\033[J");
                         if (inputPlayer.isAlive() == false)
@@ -77,13 +76,12 @@ class Game
                         }
                         break;
                     }
-            }
-            String exit=scanner.next();
-            switch (exit) {
                 case "E":
-                    Save(inputPlayer);
-                    Exit();
-                    break;
+                    {
+                        Save(inputPlayer);
+                        Exit();
+                        break;
+                    }
             }
         }
         public static void Fight(Player player1, Monsters monsters1) throws FileNotFoundException, IOException
@@ -101,9 +99,29 @@ class Game
                     {
                         case "a":
                             player1.Attack(player1, monsters1);
-                            monsters1.Evasion(player1, monsters1);
-                            player1.InfoFightPlayer(monsters1);
-                            monsters1.InfoFightMonster(player1);
+                            if (monsters1.isAlive() == false)
+                            {
+                                player1.InfoFightPlayer(monsters1);
+                                System.out.println();
+                                System.out.println(ANSI_GREEN+monsters1.name+" is dead"+ANSI_RESET);
+                                System.out.println();
+                                player1.Experience(player1,monsters1);//expirince lvl up
+                                System.out.println("Use (E)NTER to continie");
+                                String MonsterDeadKey = scanner.next();
+                                switch (MonsterDeadKey)
+                                {
+                                case "E":
+                                    PrintMenu();
+                                    input(player1);
+                                    break;
+                                }
+                            }
+                            else if(monsters1.isAlive())
+                            {
+                                monsters1.Evasion(player1, monsters1);
+                                player1.InfoFightPlayer(monsters1);
+                                monsters1.InfoFightMonster(player1);
+                            }
                             break;
                         case "r":
                             int randNum = MathUtils.GetRandomNumber(101);
@@ -112,9 +130,29 @@ class Game
                             {
                                 System.out.println(ANSI_RED+"You failed to escape"+ANSI_RESET);
                                 player1.Attack(player1, monsters1);
-                                monsters1.Evasion(player1, monsters1);
-                                player1.InfoFightPlayer(monsters1);
-                                monsters1.InfoFightMonster(player1);
+                                if (monsters1.isAlive() == false)
+                                {
+                                    player1.InfoFightPlayer(monsters1);
+                                    System.out.println();
+                                    System.out.println(ANSI_GREEN+monsters1.name+" is dead"+ANSI_RESET);
+                                    System.out.println();
+                                    player1.Experience(player1,monsters1);//expirince lvl up
+                                    System.out.println("Use (E)NTER to continie");
+                                    String MonsterDeadKey = scanner.next();
+                                    switch (MonsterDeadKey)
+                                    {
+                                    case "E":
+                                        PrintMenu();
+                                        input(player1);
+                                        break;
+                                    }
+                                }
+                                else if(monsters1.isAlive())
+                                {
+                                    monsters1.Evasion(player1, monsters1);
+                                    player1.InfoFightPlayer(monsters1);
+                                    monsters1.InfoFightMonster(player1);
+                                }
                             }
                             else if (randNum <= player1.chanceEscape)
                             {
@@ -122,22 +160,7 @@ class Game
                                 Fight(player1, monsters1);
                             }      
                             break;
-                    }
-                    if (monsters1.isAlive() == false)
-                    {
-                        System.out.println();
-                        System.out.println(ANSI_GREEN+monsters1.name+" is dead"+ANSI_RESET);
-                        player1.Experience(player1,monsters1);//expirince lvl up
-                        System.out.print("Use (E)NTER to continie");
-                        String MonsterDeadKey = scanner.next();
-                        switch (MonsterDeadKey)
-                        {
-                            case "E":
-                                PrintMenu();
-                                input(player1);
-                                break;
-                        }
-                    }
+                    } 
                 }
                 else if (player1.isAlive() == false)
                 {

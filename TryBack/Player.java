@@ -131,12 +131,11 @@ class Player extends Creature
             if (monsters.currentHealth >= 0)
             {
                 System.out.println("You hit the " +monsters.name+" for"+ANSI_RED+" "+randDamage+" damage"+ANSI_RESET);
-                System.out.println();
                 System.out.println(monsters.name+" "+ANSI_GREEN+"hp:"+monsters.currentHealth+"/"+monsters.fullHealth+ANSI_RESET);
             }
             else if (monsters.currentHealth<0)
             {
-                System.out.print("You hit the "+monsters.name+" for "+ANSI_RED+randDamage+"damage"+ANSI_RESET);
+                System.out.print("You hit the "+monsters.name+" for "+ANSI_RED+randDamage+" damage"+ANSI_RESET);
             }
             System.out.println();
         }
