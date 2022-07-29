@@ -2,7 +2,6 @@ package TryBack;
 import java.util.Scanner;
 import java.io.*;
 
-
 class Player extends Creature
 {
     public String name;
@@ -49,7 +48,7 @@ class Player extends Creature
             this.evasion = Integer.parseInt(evasion);
         }
         
-        public static Player CreatePlayer() throws FileNotFoundException
+        public static Player CreatePlayer() throws IOException
         {
 
             //crate name
@@ -59,29 +58,45 @@ class Player extends Creature
             //read from file txt
             System.out.println("Select player class");
             readClassPlayer();
-            File filePlay=new File("D:\\PlayerClass.txt");
+            FileReader filePlay=new FileReader("D:\\PlayerClass.txt");
             Scanner scan=new Scanner(filePlay);
-            String playerClass =scan.nextLine();
-            String[] arrPlayerClass=playerClass.split(" ");
+            String[]arrPlayerClass=new String[3];
+            for (int i = 0; i < arrPlayerClass.length; i++) {
+                while (scan.hasNextLine()) {
+                    String playerClass =scan.nextLine();
+                    arrPlayerClass[i]=playerClass;
+                    break;
+                }
+            }
             int select = scaner.nextInt();
             String[] playerProperties = arrPlayerClass[select - 1].split(";");
             Player playerObj = new Player(playerName,playerProperties[0], playerProperties[1], playerProperties[2], playerProperties[3],playerProperties[4], playerProperties[5], playerProperties[6], playerProperties[7]);
             scan.close();
+            filePlay.close();
             return playerObj;
         }
 
-        public static void readClassPlayer() throws FileNotFoundException
+        public static void readClassPlayer() throws IOException
         {
-            File filePlayerClass=new File("D:\\PlayerClass.txt");
+            
+            FileReader filePlayerClass=new FileReader("D:\\PlayerClass.txt");
             Scanner scan1=new Scanner(filePlayerClass);
-            String playerClass1 =scan1.nextLine();
-            String[] arrPlayerClass1=playerClass1.split(" ");
+            String playerClass1;
+            String[]arrPlayerClass1=new String[3];
+            for (int i = 0; i < arrPlayerClass1.length; i++) {
+            while (scan1.hasNextLine()) {
+                    playerClass1 =scan1.nextLine();
+                    arrPlayerClass1[i]=playerClass1; 
+                    break; 
+                }
+            }
             for (int i = 0; i < arrPlayerClass1.length; i++)
             {
                 String[]PlayerProp=arrPlayerClass1[i].split(";");
                 System.out.println((i+1)+")"+PlayerProp[1]); 
             }
             scan1.close();
+            filePlayerClass.close();
         }
 
         public void WriteInfoPlayer() throws IOException
@@ -115,13 +130,13 @@ class Player extends Creature
         {
             if (monsters.currentHealth >= 0)
             {
-                System.out.println("You hit the {monsters.name} for"+ANSI_RED+" "+randDamage+"damage"+ANSI_RESET);
+                System.out.println("You hit the " +monsters.name+" for"+ANSI_RED+" "+randDamage+" damage"+ANSI_RESET);
                 System.out.println();
                 System.out.println(monsters.name+" "+ANSI_GREEN+"hp:"+monsters.currentHealth+"/"+monsters.fullHealth+ANSI_RESET);
             }
             else if (monsters.currentHealth<0)
             {
-                System.out.print("You hit the"+monsters.name+"for "+ANSI_RED+randDamage+"damage"+ANSI_RESET);
+                System.out.print("You hit the "+monsters.name+" for "+ANSI_RED+randDamage+"damage"+ANSI_RESET);
             }
             System.out.println();
         }

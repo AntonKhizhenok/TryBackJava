@@ -48,7 +48,7 @@ class Game
                 case 1:
                     {
                         inputPlayer.PrintInfoPlayer(inputPlayer);
-                        System.out.print("Use (E)NTER to continie");
+                        System.out.println("Use (E)NTER to continie");
                         String MenuKey = scanner.next();
                         switch (MenuKey)
                         {
@@ -64,7 +64,7 @@ class Game
                         System.out.println("\033[H\033[J");
                         if (inputPlayer.isAlive() == false)
                         {
-                            System.out.print("You dead(");
+                            System.out.println("You dead(");
                             scanner.next();
                             PrintMenu();
                             input(inputPlayer);
@@ -95,7 +95,7 @@ class Game
             {
                 if (player1.isAlive())
                 {
-                    System.out.print("(a)ttack/(r)un away:");
+                    System.out.println("(a)ttack/(r)un away:");
                     String attOrRun = scanner.next();
                     switch (attOrRun)
                     {

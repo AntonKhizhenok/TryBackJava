@@ -76,7 +76,7 @@ class Monsters extends Creature
 
     public void PrintMonster()
     {
-        System.out.print("You have encountered "+ANSI_BLUE+name+ANSI_RESET+typeMonster+", lvl."+lvl+", dmg."+minDamage+"-"+maxDamage+", hp "+currentHealth+",rarityMonster:");
+        System.out.print("You have encountered "+ANSI_BLUE+name+ANSI_RESET+" ("+typeMonster+", lvl."+lvl+", dmg."+minDamage+"-"+maxDamage+", hp "+currentHealth+",rarityMonster:");
         if (rarityMonster=="Common")
         {
             System.out.println( ANSI_CYAN+rarityMonster+ANSI_RESET+")");
@@ -108,7 +108,8 @@ class Monsters extends Creature
     {
         if (player.currentHealth >= 0)
         {
-            System.out.println(name+" hit You for "+ANSI_RED+randDamage+"damage"+ANSI_RESET+player.name+ANSI_GREEN+"hp:"+player.currentHealth+"/"+player.fullHealth+ANSI_RESET);
+            System.out.println(name+" hit You for "+ANSI_RED+randDamage+" damage"+ANSI_RESET);
+            System.out.println(player.name+ANSI_GREEN+" hp:"+player.currentHealth+"/"+player.fullHealth+ANSI_RESET);
         }
         else if (player.currentHealth<0)
         {
